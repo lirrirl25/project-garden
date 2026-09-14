@@ -1,0 +1,20 @@
+{
+  "name": "project-garden",
+  "interface": {
+    "displayName": "Project Garden"
+  },
+  "plugins": [
+    {
+      "name": "project-garden-bridge",
+      "source": {
+        "source": "local",
+        "path": "./plugins/project-garden-bridge"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    }
+  ]
+}

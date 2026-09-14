@@ -1,0 +1,21 @@
+{
+  "name": "project-garden-desktop",
+  "version": "0.2.2",
+  "private": true,
+  "description": "A local-first desktop habitat for real projects.",
+  "main": "electron-main.cjs",
+  "scripts": {
+    "start": "electron .",
+    "check": "node scripts/check.cjs",
+    "setup:plugin": "node scripts/configure-plugin.cjs",
+    "setup:electron": "node node_modules/electron/install.js"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.30.0",
+    "zod": "^4.5.4",
+    "electron": "^44.1.0"
+  },
+  "engines": {
+    "node": ">=22.12.0"
+  }
+}

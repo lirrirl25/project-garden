@@ -1,0 +1,150 @@
+/* Shared source-coordinate canvas: the pot's bottom is always the ground. */
+.modular-plant { position: relative; display: block; width: 94px; height: 94px; overflow: visible; }
+.pixel-stage.is-letterboxed { background-color: #214639; background-size: contain; background-position: center; }
+.modular-plant img { display: block; object-fit: contain; image-rendering: auto; pointer-events: none; }
+.modular-pot, .modular-body, .modular-canopy, .modular-stem { position: absolute; inset: 0; width: 100%; height: 100%; }
+.modular-pot { z-index: 0; }
+.modular-canopy { display: block; z-index: 1; transform-origin: 50% 72%; transition: filter 300ms ease, transform 300ms ease; }
+.modular-organ { position: absolute; transform: translate(-50%,-100%); z-index: 3; }
+.modular-stem { overflow: visible; z-index: 2; }
+.modular-body { z-index: 1; }
+.modular-display > .modular-plant { position: absolute; inset: auto 0 -2.734375%; width: 100%; height: 100%; }
+.creature__art > .modular-display { width: 100%; height: 100%; }
+.project-row__art .modular-plant, .console-project__sprite .modular-plant, .hidden-project-list__art .modular-plant { width: 100%; height: 100%; }
+.project-row__mark { width: 42px; height: 48px; padding: 3px; border: 1px solid #8ea481; background: #d6e2c4; grid-template-columns: minmax(0,1fr); }
+.project-row__mark .modular-plant { width: 100%; height: auto; aspect-ratio: 1; }
+.project-row__mark .sidebar-seed { width: 34px; height: 34px; image-rendering: auto; }
+.near-plant { z-index: 3; }
+.creature.front-plant.midground-plant { z-index: 1; width: calc(var(--front-plant-size) * .86); transform: translate(-50%,-100%); }
+.front-plant.midground-plant .creature__art { width: calc(var(--front-plant-size) * .78); height: calc(var(--front-plant-size) * .78); }
+.midground-plant .creature__caption { position: absolute; bottom: calc(100% + 5px); width: max-content; max-width: 160px; opacity: 0; pointer-events: none; }
+.midground-plant.is-plant-hovered, .midground-plant:focus-visible { z-index: 5; }
+.midground-plant.is-plant-hovered .creature__caption, .midground-plant:focus-visible .creature__caption { opacity: 1; }
+.journal-sync-note { padding: 16px; background: #e5ecd5; border-left: 3px solid var(--moss); }
+.journal-sync-note h3, .journal-section-title { margin: 0 0 8px; font-size: 15px; color: var(--pine); }
+.journal-sync-note p, .journal-fallback p { margin: 0 0 10px; font-size: 13px; line-height: 1.75; color: var(--pine); }
+.journal-sync-status { display: inline-flex; align-items: center; gap: 6px; font-size: 11px; color: var(--pine); }
+.journal-sync-status svg { width: 15px; height: 15px; }
+.journal-section-title { margin-top: 24px; }
+.growth-timeline { list-style: none; margin: 12px 0 22px; padding: 0; }
+.growth-timeline__entry { position: relative; display: grid; grid-template-columns: 12px 64px minmax(0,1fr); gap: 12px; align-items: center; padding: 0 0 18px; color: var(--pine); }
+.growth-timeline__art { width: 64px; height: 64px; display: grid; place-items: center; background: #e5ecd5; border: 1px solid #a0b390; }
+.growth-timeline__art .modular-plant, .growth-timeline__art .seed-sprite { width: 60px; height: 60px; }
+.growth-timeline__art .modular-plant { translate: 0 -12px; }
+.stage-date-fields { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 14px; }
+.stage-date-fields label { min-width: 0; }
+.stage-date-fields input, #stage-dates-form select { width: 100%; min-height: 38px; padding: 8px; border: 1px solid #799364; background: var(--cream); color: var(--pine); font: inherit; }
+.stage-date-fields time, .stage-date-fields small { display: block; font-size: 12px; }
+@media(max-width:480px) { .stage-date-fields { grid-template-columns: minmax(0,1fr); } }
+.growth-previous { position: absolute; inset: 0; z-index: 2; pointer-events: none; animation: growth-before 1200ms ease-out both; animation-delay: var(--growth-delay,0ms); }
+.is-growing > .modular-canopy { animation: growth-unfurl 1800ms ease-out both; animation-delay: var(--growth-delay,0ms); }
+.growth-sparkles { position: absolute; inset: 0; pointer-events: none; z-index: 4; }
+.growth-sparkles i { position: absolute; width: 5px; height: 5px; left: 35%; top: 60%; background: #f4dd85; box-shadow: 0 0 5px #ffeda5; animation: growth-spark 2100ms ease-out both; animation-delay: var(--growth-delay,0ms); }
+.growth-sparkles i:nth-child(2) { left: 63%; top: 49%; --spark-x: 10px; }
+.growth-sparkles i:nth-child(3) { left: 47%; top: 37%; --spark-x: -5px; }
+.growth-sparkles i:nth-child(4) { left: 31%; top: 42%; --spark-x: -13px; }
+.growth-sparkles i:nth-child(5) { left: 69%; top: 65%; --spark-x: 14px; }
+.is-progressing .growth-sparkles i { animation-duration: 1400ms; }
+@keyframes growth-before { 0%,12% { opacity: 1; } 100% { opacity: 0; } }
+@keyframes growth-unfurl { 0% { opacity: .15; scale: .86; } 45% { opacity: 1; scale: 1.045; } 72% { scale: .99; } 100% { opacity: 1; scale: 1; } }
+@keyframes growth-spark { 0% { opacity: 0; translate: 0 6px; scale: .4; } 18% { opacity: 1; } 100% { opacity: 0; translate: var(--spark-x, -8px) -30px; scale: .2; } }
+@media(prefers-reduced-motion:reduce) {
+  .growth-previous, .growth-sparkles { display: none; }
+  .is-growing > .modular-canopy { animation: none; }
+}
+.growth-timeline__entry:not(:last-child)::before { content: ''; position: absolute; top: 10px; bottom: 0; left: 4px; width: 1px; background: #a0b390; }
+.growth-timeline__dot { position: relative; z-index: 1; width: 9px; height: 9px; margin-top: 5px; background: #799364; border: 1px solid var(--pine); }
+.growth-timeline__entry.is-current .growth-timeline__dot { background: var(--sun); }
+.growth-timeline__entry strong { font-size: 14px; }
+.growth-timeline__entry time, .growth-timeline__entry small:not(.growth-timeline__current) { display: block; font-size: 12px; line-height: 1.6; margin-top: 3px; color: var(--muted); }
+.growth-timeline__current { margin-left: 8px; padding: 2px 5px; font-size: 10px; color: var(--pine); background: #e5ecd5; }
+.journal-fallback { padding: 14px 0; border-top: 1px solid #a0b390; }
+.modal [data-action="edit-stage-dates"] { display: block; margin: 0 0 24px; }
+.journal-fallback summary { cursor: pointer; font-size: 13px; color: var(--pine); padding: 5px 0; }
+.journal-fallback p { margin-top: 10px; }
+.journal-fallback summary:focus-visible { outline: 2px solid var(--pine); outline-offset: 3px; }
+.project-row__copy .project-row__species { color: var(--pine); white-space: normal; overflow-wrap: anywhere; line-height: 1.4; }
+.project-row { min-height: 72px; }
+.console-actions { grid-template-columns: repeat(2,minmax(0,1fr)); }
+.decor-scope, .decor-target { color: var(--pine); font-size: 12px; line-height: 1.6; margin: 8px 0; }
+.decor-target { overflow-wrap: anywhere; }
+.front-plant .modular-plant { width: 100%; height: 100%; }
+.modular-canopy.vitality-soft { filter: saturate(.88); transform: rotate(1deg); }
+.modular-canopy.vitality-yellow { filter: sepia(.3) saturate(.78); transform: rotate(2deg); }
+.modular-canopy.vitality-resting { filter: sepia(.45) saturate(.6) brightness(.84); transform: rotate(3deg); }
+.language-switch { min-width: 38px; min-height: 32px; padding: 5px 8px; color: var(--pine); background: transparent; border: 1px solid #80977b; font-size: 12px; font-weight: 700; cursor: pointer; }
+.language-switch:hover { background: #e8eddb; }
+.language-switch:focus-visible { outline: 3px solid #9b732b; outline-offset: 2px; }
+.console-actions .pixel-button { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 4px; line-height: 1.4; }
+.console-actions .pixel-button small { display: block; flex: 1 0 100%; font-size: 10px; }
+html[lang="en"] .topbar__right { gap: 7px; }
+html[lang="en"] .console-actions .pixel-button { font-size: 10px; }
+html[lang="en"] .decor-card button { white-space: normal; }
+/* Utility copy remains readable without enlarging the greenhouse chrome. */
+.shelf-footer, html[lang="en"] .shelf-footer { gap: 2px; padding: 8px 15px; font-family: inherit; font-size: 11px; line-height: 1.4; color: var(--pine); }
+.shelf-hidden-button { min-height: 24px; font-family: inherit; font-size: 11px; }
+.project-row__copy strong { font-size: 13px; }
+.project-row__copy small { font-size: 12px; line-height: 1.45; }
+.console-agent, .console-agent small, .console-agent button, .console-actions .pixel-button small { font-size: 12px; line-height: 1.5; }
+.journal-sync-status, .growth-timeline__current { font-size: 12px; }
+.journal-date-note { margin: 0 0 18px; font-size: 13px; line-height: 1.7; color: var(--pine); }
+.journal-latest-progress { display: flex; flex-wrap: wrap; gap: 4px 12px; margin: 12px 0; font-size: 13px; line-height: 1.6; color: var(--pine); }
+.journal-latest-progress time { font-variant-numeric: tabular-nums; }
+.front-plant .creature__caption strong { font-size: 12px; }
+.front-plant .creature__caption small { font-family: inherit; font-size: 11px; line-height: 1.45; }
+.front-plant.is-plant-hovered .creature__caption small, .front-plant.is-selected .creature__caption small, .front-plant:focus-visible .creature__caption small { color: var(--pine); }
+html[lang="en"] .panorama__heading h1 { letter-spacing: -.035em; }
+@media (max-width: 1000px) {
+  .topbar { padding: 8px 12px; height: auto; min-height: 64px; }
+  .topbar__right { flex-wrap: wrap; justify-content: flex-end; }
+  .panorama__heading { gap: 8px; align-items: flex-start; }
+  .garden-heading-note { max-width: 200px; font-size: 11px; }
+  .console-agent { flex-wrap: wrap; gap: 5px; }
+  .console-agent div { flex-wrap: wrap; gap: 8px; }
+}
+/* Portrait monitor: preserve the whole panorama, scroll only the plant list. */
+@media (max-width: 760px) and (min-height: 650px) {
+  .app-shell--dashboard { height: 100dvh; min-height: 0; overflow: hidden; }
+  .workspace.greenhouse-layout { display: grid; grid-template-columns: 140px minmax(0,1fr); flex: 1; min-height: 0; }
+  .project-shelf { max-height: none; min-height: 0; display: flex; border-right: 2px solid var(--ink); border-bottom: 0; }
+  .project-list { display: block; overflow-y: auto; min-height: 0; }
+  .project-row { padding: 7px 2px; gap: 4px; grid-template-columns: 32px minmax(0,1fr); }
+  .project-row .status-dot { display: none; }
+  .project-row__copy strong { font-size: 12px; }
+  .project-row__copy small { font-size: 12px; }
+  .project-row__mark { width: 32px; height: 38px; padding: 2px; }
+  .project-row__mark .sidebar-seed { width: 26px; height: 26px; }
+  .project-row__mark .modular-plant { width: 100%; height: auto; aspect-ratio: 1; }
+  .shelf-heading { padding: 12px 8px; }
+  .shelf-heading h2 { font-size: 19px; }
+  .shelf-footer, html[lang="en"] .shelf-footer { display: grid; padding: 7px 8px; }
+  .panorama { display: flex; flex-direction: column; min-height: 0; overflow: hidden; }
+  .panorama__heading { flex-direction: column; }
+  .panorama__heading h1 { font-size: 23px; }
+  .pixel-stage { flex: 1 1 0; min-height: 0; }
+  .garden-console { flex: 0 0 auto; display: grid; grid-template-columns: minmax(0,1fr); grid-template-rows: auto auto auto; grid-template-areas: 'project' 'actions' 'agent'; }
+  .console-project { padding: 8px; min-width: 0; }
+  .console-actions { min-width: 0; }
+  .console-actions .pixel-button { min-height: 48px; }
+  .console-agent { padding: 8px; display: flex; min-width: 0; }
+  .console-agent > span, .console-agent div { min-width: 0; flex-wrap: wrap; justify-content: flex-start; }
+  .console-agent small { display: none; }
+}
+@media (prefers-reduced-motion: reduce) { .modular-canopy { transition: none; } }
+
+.front-plant { touch-action: none; cursor: default; }
+.front-plant.is-plant-hovered { cursor: grab; }
+.front-plant.is-slot-dragging { z-index: 8; cursor: grabbing; opacity: .75; }
+.front-plant.is-slot-target .creature__art { filter: drop-shadow(-2px 0 #f5de84) drop-shadow(2px 0 #f5de84) drop-shadow(0 -2px #f5de84); }
+.slot-swap-options { display: grid; gap: 10px; margin: 18px 0; }
+.floating-pet__plant.is-breezy .modular-canopy { animation: plant-breeze 1800ms ease-in-out; }
+@keyframes plant-breeze {
+  0%,100% { rotate: 0deg; }
+  22% { rotate: 2.5deg; }
+  48% { rotate: -1.8deg; }
+  70% { rotate: 1deg; }
+  86% { rotate: -.4deg; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .floating-pet__plant.is-breezy .modular-canopy { animation: none; }
+}

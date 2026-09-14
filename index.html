@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light" />
+    <title>项目园</title>
+    <link rel="icon" href="assets/garden-app-icon-v1.png" type="image/png" />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="growth-v2.css" />
+    <link rel="preload" href="assets/greenhouse-background-clean-v2.png" as="image" />
+    <link rel="prefetch" href="assets/greenhouse-background-shovel-v2.png" />
+    <link rel="prefetch" href="assets/greenhouse-background-seedbox-v2.png" />
+  </head>
+  <body>
+    <main id="app" class="app-shell"><div class="loading-garden" role="status">正在恢复园区…</div></main>
+    <div id="modal-root"></div>
+    <script src="growth-model.js"></script>
+    <script src="growth-history.js"></script>
+    <script src="i18n.js"></script>
+    <script src="garden-presentation.js"></script>
+    <script src="plant-hit-test.js"></script>
+    <script src="garden-editing.js"></script>
+    <script src="settings.js"></script>
+    <script src="app.js"></script>
+    <script src="plant-interactions.js"></script>
+  </body>
+</html>

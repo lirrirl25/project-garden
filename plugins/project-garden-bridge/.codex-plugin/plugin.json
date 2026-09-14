@@ -1,0 +1,22 @@
+{
+  "name": "project-garden-bridge",
+  "version": "0.4.0",
+  "description": "Local-only Project Garden progress with automatic anonymous Codex-project-to-plant binding, offline delivery, and decoration-insight updates.",
+  "author": {
+    "name": "Project Garden"
+  },
+  "skills": "./skills/",
+  "mcpServers": "./.mcp.json",
+  "interface": {
+    "displayName": "Project Garden Sync",
+    "shortDescription": "Let Codex projects grow one local plant across all their tasks.",
+    "longDescription": "A local Codex bridge that imports local Codex projects as Project Garden plants and routes progress from all tasks in the same project back to that plant through a one-way workspace hash. When the desktop app is closed, anonymous events wait in a local queue for its next launch. Project names, paths, files, code, token counts, and conversation content stay on this computer.",
+    "developerName": "Project Garden",
+    "category": "Productivity",
+    "capabilities": ["Local-only sync", "Offline event queue", "Project-level plants", "Anonymous workspace hashes", "Capped insight rewards"],
+    "defaultPrompt": [
+      "完成这项工作后，如且唯如产生了具体可验证的进展，请用 Project Garden 本地工具记录匿名等级；同一 Codex 项目内的所有 task 都会回到同一株本地植物。若只产生真正的新方向或解决了实际分歧，可匿名记录为装饰灵感；不要发送项目内容、token 数或对话。"
+    ],
+    "brandColor": "#E87943"
+  }
+}

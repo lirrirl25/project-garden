@@ -1,0 +1,461 @@
+:root {
+  --night: #173a35;
+  --ink: #18372e;
+  --pine: #285548;
+  --moss: #4f8c57;
+  --leaf: #82b85e;
+  --sun: #f1c85b;
+  --sky: #9bd9d0;
+  --paper: #f7f0d6;
+  --cream: #fff9e8;
+  --soil: #9d6c43;
+  --clay: #c96843;
+  --muted: #5a7467;
+  --line: #2e5d4d;
+  --danger: #a94b43;
+  --pixel: "Cascadia Mono", "Consolas", monospace;
+  --sans: "Microsoft YaHei UI", "Noto Sans SC", "Segoe UI", sans-serif;
+}
+
+/* Quiet greenhouse chrome; the panorama remains the main visual. */
+.brand__image { width: 38px; height: 38px; display: block; image-rendering: auto; }
+.topbar .decor-corner-button, .topbar .desktop-corner-button { display: inline-flex; align-items: center; justify-content: center; gap: 7px; }
+.topbar .decor-corner-button svg, .topbar .desktop-corner-button svg { width: 16px; height: 16px; }
+.garden-heading-note { color: #577461; font-size: 12px; line-height: 1.5; }
+.garden-welcome-note { position: absolute; left: 28px; bottom: 28px; display: flex; align-items: flex-start; gap: 12px; max-width: 370px; padding: 16px 20px; color: #244936; background: #fff9e8; border: 2px solid #4c6d51; box-shadow: 3px 3px 0 #173a3566; }
+.garden-welcome-note > svg { margin-top: 2px; width: 20px; height: 20px; }
+.garden-welcome-note strong { display: block; font-size: 14px; }
+.garden-welcome-note small { display: block; margin-top: 7px; font-size: 12px; line-height: 1.7; color: #536c55; }
+.garden-console.garden-console--empty { display: grid; grid-template-columns: minmax(200px,1fr) auto auto; align-items: center; gap: 16px; padding: 16px 20px; }
+.garden-console--empty > span { min-width: 0; }
+.garden-console--empty .pixel-button { font-size: 12px; padding-inline: 10px; }
+.garden-console--empty p { font-size: 12px; line-height: 1.65; }
+.loading-garden, .recovery-screen { display: grid; place-content: center; height: 100%; min-height: 300px; padding: 32px; text-align: center; color: #244936; background: #fff9e8; }
+.recovery-screen img { width: 72px; height: 72px; margin: 0 auto 18px; }
+.recovery-screen h1 { font-size: 24px; }
+.storage-notice { position: fixed; z-index: 100; bottom: 24px; left: 50%; transform: translateX(-50%); width: max-content; max-width: 90%; border: 1px solid #59725a; padding: 12px 16px; color: #244936; background: #fff9e8; font-size: 13px; box-shadow: 0 4px 14px #173a3533; }
+.storage-notice button { margin-left: 12px; border: 0; color: #285548; background: transparent; text-decoration: underline; }
+.modal:has(.decor-grid) { width: min(850px, calc(100vw - 48px)); }
+.modal .insight-wallet { display: flex; align-items: center; justify-content: space-between; gap: 16px; background: #173a35; color: #fff4cc; padding: 14px 18px; border: 2px solid #42684f; }
+.insight-wallet > span { display: flex; align-items: center; gap: 9px; font-size: 13px; }
+.insight-wallet strong { font-family: var(--pixel); font-size: 28px; }
+.insight-wallet .text-button { display: flex; align-items: center; gap: 7px; color: #fff4cc; }
+.modal .decor-grid { gap: 18px; }
+.modal .decor-group { grid-template-columns: repeat(2,minmax(0,1fr)); gap: 10px; }
+.modal .decor-group > .eyebrow { grid-column: 1 / -1; color: #4e6755; font-size: 11px; }
+.modal .decor-card { grid-template-columns: 68px minmax(0,1fr); grid-template-rows: auto auto; gap: 5px 12px; min-height: 110px; padding: 12px; background: #fff9e8; border: 1px solid #b4c1a3; }
+.modal .decor-card.is-active { border: 2px solid #517251; padding: 11px; }
+.modal .decor-card__preview { grid-row: 1 / 3; width: 68px; height: 68px; border: 0; background: #fff9e8 url('assets/garden-shop-icons-v1.png') var(--item-x) var(--item-y) / 400% 200% no-repeat; box-shadow: none; image-rendering: auto; }
+.modal .decor-card__preview::before, .modal .decor-card__preview::after { display: none; }
+.modal .decor-card__copy { min-width: 0; }
+.modal .decor-card strong { font-size: 14px; }
+.modal .decor-card small { font-size: 12px; line-height: 1.5; color: #53624e; }
+.modal .decor-card button { grid-column: 2; justify-self: start; min-height: 28px; margin: 0; padding: 4px 6px; font-size: 11px; white-space: normal; }
+.insight-history { margin-top: 20px; padding-top: 14px; border-top: 1px solid #b4c1a3; }
+.insight-history summary { font-size: 13px; cursor: pointer; color: #285548; }
+.insight-ledger-list { padding-top: 12px; }
+.insight-entry { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 9px 2px; border-bottom: 1px solid #d5dcc4; font-size: 12px; }
+.insight-entry small { display: block; margin-top: 4px; color: #53624e; }
+.insight-entry > b { color: #285548; font-size: 16px; }
+@media(max-width:640px) { .modal .decor-group { grid-template-columns: 1fr; } .garden-heading-note { display: none; } }
+
+* { box-sizing: border-box; }
+/* The compact window is a transparent desktop companion, not a miniature page. */
+html.floating-mode, html.floating-mode body, html.floating-mode #app { background: transparent; min-height: 0; overflow: hidden; }
+html, body, #app { min-height: 100%; }
+html, body, #app { height: 100%; }
+body { margin: 0; overflow: hidden; color: var(--ink); background: var(--night); font-family: var(--sans); font-size: 15px; line-height: 1.45; }
+button, input, textarea { font: inherit; }
+button { cursor: pointer; }
+button, input, textarea { -webkit-tap-highlight-color: transparent; }
+button:focus-visible, input:focus-visible, textarea:focus-visible { outline: 3px solid var(--sun); outline-offset: 3px; }
+svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-linecap: square; stroke-linejoin: miter; stroke-width: 2; flex: 0 0 auto; }
+.app-shell { min-height: 100vh; background: var(--paper); }
+/* The desktop garden is one viewport, not a long webpage. Imported projects
+   scroll only inside the ledger; they never stretch the greenhouse below the
+   bottom control deck. */
+.app-shell--dashboard { height: 100vh; min-height: 0; display: grid; grid-template-rows: auto minmax(0, 1fr) auto; overflow: hidden; }
+.eyebrow { margin: 0; color: var(--moss); font-family: var(--pixel); font-size: 10px; font-weight: 700; letter-spacing: .08em; line-height: 1.2; }
+.button, .pixel-button { min-height: 44px; border: 3px solid var(--ink); box-shadow: 3px 3px 0 var(--ink); display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 9px 14px; color: var(--ink); background: var(--cream); font-family: var(--sans); font-size: 13px; font-weight: 800; transition: transform 120ms steps(2, end), box-shadow 120ms steps(2, end), background-color 120ms ease; }
+.button:hover, .pixel-button:hover { transform: translate(2px, 2px); box-shadow: 1px 1px 0 var(--ink); }
+.button--accent, .pixel-button--primary { background: var(--sun); }
+.button--dark { color: var(--cream); background: var(--night); border-color: var(--cream); box-shadow: 3px 3px 0 #7fb38d; }
+.text-button { border: 0; color: var(--pine); background: transparent; padding: 9px 2px; font-size: 13px; font-weight: 800; text-decoration: underline; text-underline-offset: 4px; }
+
+/* Pixel title screen */
+.onboarding { min-height: 100vh; position: relative; overflow: hidden; display: grid; grid-template-columns: minmax(20px, 1fr) minmax(0, 800px) minmax(20px, 1fr); grid-template-rows: auto 1fr auto; padding: 30px 0; color: var(--cream); background-color: #173a35; background-image: linear-gradient(90deg, rgba(255,255,255,.045) 1px, transparent 1px), linear-gradient(rgba(255,255,255,.045) 1px, transparent 1px); background-size: 16px 16px; }
+.onboarding::before { content: ""; position: absolute; right: 6vw; bottom: -45px; width: 260px; height: 190px; border: 12px solid #3d705e; border-bottom: 0; box-shadow: inset 0 0 0 9px #225045, 16px 16px 0 rgba(0,0,0,.12); opacity: .65; }
+.onboarding__topline, .onboarding__heading, .habitat-choices, .onboarding__note { grid-column: 2; position: relative; z-index: 1; }
+.onboarding__topline { color: #cce6ba; font-family: var(--pixel); font-size: 11px; }
+.onboarding__heading { align-self: center; padding: 40px 0 28px; }
+.onboarding__heading .eyebrow { color: var(--sun); margin-bottom: 14px; }
+.onboarding h1 { max-width: 680px; margin: 0; font-family: var(--sans); font-size: clamp(40px, 6.2vw, 69px); font-weight: 900; letter-spacing: -.07em; line-height: 1.08; text-shadow: 4px 4px 0 #0d2923; }
+.onboarding__heading > p:last-child { margin: 20px 0 0; color: #d9ecce; font-size: 15px; line-height: 1.8; }
+.habitat-choices { align-self: end; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.habitat-choice { min-height: 142px; border: 3px solid #d8ecce; box-shadow: 5px 5px 0 #0d2923; display: grid; grid-template-columns: 74px 1fr auto; gap: 14px; align-items: center; padding: 17px; color: var(--cream); background: #245246; text-align: left; transition: transform 120ms steps(2, end), background-color 120ms ease, box-shadow 120ms steps(2, end); }
+.habitat-choice:hover { transform: translate(3px, 3px); background: #31654f; box-shadow: 2px 2px 0 #0d2923; }
+.choice-copy { display: grid; gap: 3px; }.choice-copy strong { font-size: 24px; }.choice-copy small { color: #cbe5bf; font-size: 12px; }.choice-arrow { color: var(--sun); }.choice-art { width: 66px; height: 66px; position: relative; display: block; border: 3px solid #173a35; background: #9bd9d0; image-rendering: pixelated; }
+.choice-art--garden::before { content: ""; position: absolute; left: 29px; bottom: 7px; width: 7px; height: 39px; background: #447a49; box-shadow: -20px 10px 0 #6bab58, 17px -3px 0 #8cc765, 4px -22px 0 var(--sun); }
+.choice-art--garden i, .choice-art--garden b, .choice-art--garden em { position: absolute; display: block; background: #5b9957; }.choice-art--garden i { left: 10px; bottom: 26px; width: 19px; height: 9px; }.choice-art--garden b { left: 35px; bottom: 17px; width: 18px; height: 10px; }.choice-art--garden em { left: 26px; top: 9px; width: 15px; height: 15px; background: var(--sun); }
+.choice-art--zoo i { position: absolute; left: 14px; top: 23px; width: 37px; height: 27px; background: #d28a54; }.choice-art--zoo b, .choice-art--zoo em { position: absolute; top: 12px; width: 11px; height: 16px; background: #b66842; }.choice-art--zoo b { left: 16px; }.choice-art--zoo em { right: 13px; }
+.onboarding__note { margin: 18px 0 0; color: #b4d6ae; font-size: 12px; }
+
+/* Window and ledger */
+.topbar { min-height: 65px; padding: 0 21px; border-bottom: 3px solid var(--ink); display: flex; align-items: center; justify-content: space-between; gap: 18px; background: var(--cream); }
+.brand { display: inline-flex; align-items: center; gap: 9px; border: 0; color: var(--ink); background: transparent; padding: 0; text-align: left; }.brand__seal { width: 34px; height: 34px; display: grid; place-items: center; color: var(--ink); border: 3px solid var(--ink); background: var(--sun); }.brand__seal svg { width: 18px; height: 18px; }.brand strong { display: block; font-size: 19px; font-weight: 900; letter-spacing: -.07em; line-height: 1; }.brand small { display: block; margin-top: 4px; color: var(--moss); font-family: var(--pixel); font-size: 8px; letter-spacing: .06em; }
+.topbar__right { display: flex; align-items: center; gap: 10px; }.desktop-corner-button { min-height: 34px; border: 2px solid var(--ink); color: var(--ink); background: var(--sky); padding: 4px 9px; font-family: var(--pixel); font-size: 10px; font-weight: 700; }.desktop-corner-button:hover { background: #c8e9dd; }.mode-switch { display: flex; border: 2px solid var(--ink); padding: 2px; background: #dcebd3; }.mode-switch button { min-height: 27px; border: 0; padding: 3px 7px; color: var(--pine); background: transparent; font-size: 11px; font-weight: 800; }.mode-switch button.is-active { color: var(--cream); background: var(--pine); }.privacy-chip { display: inline-flex; align-items: center; gap: 5px; color: var(--muted); font-size: 11px; font-weight: 700; }.privacy-chip svg { width: 13px; height: 13px; color: var(--moss); }
+.workspace { min-height: 0; display: grid; grid-template-columns: clamp(228px, 21vw, 256px) minmax(0, 1fr); background: var(--paper); }
+.project-shelf { min-height: 0; overflow: hidden; display: flex; flex-direction: column; border-right: 3px solid var(--ink); background: #e9dfbd; }.shelf-heading { display: flex; align-items: center; justify-content: space-between; padding: 18px 15px 14px; border-bottom: 2px solid #9fb78c; }.shelf-heading h2 { margin: 4px 0 0; font-size: 23px; font-weight: 900; letter-spacing: -.08em; }.round-button, .icon-button { width: 35px; height: 35px; display: grid; place-items: center; border: 2px solid var(--ink); color: var(--ink); background: var(--sun); box-shadow: 2px 2px 0 var(--ink); }.round-button:hover, .icon-button:hover { transform: translate(1px,1px); box-shadow: 1px 1px 0 var(--ink); }.project-list { min-height: 0; flex: 1 1 auto; display: grid; align-content: start; gap: 4px; padding: 9px 8px; overflow: auto; overscroll-behavior: contain; }.project-row { min-height: 59px; width: 100%; display: grid; grid-template-columns: 43px minmax(0,1fr) 8px; align-items: center; gap: 8px; border: 2px solid transparent; color: var(--ink); background: transparent; padding: 6px; text-align: left; cursor: context-menu; transition: background-color 100ms ease, transform 100ms steps(2,end); }.project-row:hover { background: #d4e7c4; }.project-row.is-selected { border-color: var(--ink); background: var(--cream); box-shadow: 2px 2px 0 var(--ink); }.project-row__mark { width: 39px; height: 42px; display: grid; place-items: center; overflow: hidden; background: #9bd9d0; border: 2px solid var(--ink); }.project-row__mark .pixel-plant, .project-row__mark .pixel-animal { width: 38px; height: 38px; }.project-row__copy { min-width: 0; display: grid; gap: 2px; }.project-row__copy strong { overflow: hidden; font-size: 12px; font-weight: 900; text-overflow: ellipsis; white-space: nowrap; }.project-row__copy small { overflow: hidden; color: var(--muted); font-size: 10px; text-overflow: ellipsis; white-space: nowrap; }.status-dot { width: 7px; height: 7px; display: inline-block; background: var(--moss); }.status-dot--well { background: #4f8c57; }.status-dot--soft { background: #e6a63c; }.status-dot--resting { background: #a67454; }.shelf-empty { margin: 17px 8px; color: var(--muted); font-size: 12px; line-height: 1.7; }.shelf-footer { margin-top: auto; flex: 0 0 auto; display: grid; gap: 3px; padding: 12px 15px; border-top: 2px solid #9fb78c; color: var(--muted); font-family: var(--pixel); font-size: 9px; }.shelf-hidden-button { width: max-content; border: 0; color: var(--pine); background: transparent; padding: 0; font-family: var(--pixel); font-size: 9px; font-weight: 700; text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }.shelf-hidden-button:disabled { color: #8a9585; cursor: default; text-decoration: none; }
+
+/* Central panorama */
+.panorama { min-width: 0; min-height: 0; display: grid; grid-template-rows: auto minmax(0, 1fr) auto; background: var(--paper); }.panorama__heading { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 16px 21px 13px; border-bottom: 2px solid var(--ink); background: var(--cream); }.panorama__heading h1 { margin: 4px 0 0; font-size: clamp(18px, 2.15vw, 30px); font-weight: 900; letter-spacing: -.075em; line-height: 1.12; }.sun-clock { display: inline-flex; align-items: center; gap: 6px; flex: 0 0 auto; color: var(--pine); font-family: var(--pixel); font-size: 10px; }.sun-clock i { width: 13px; height: 13px; background: var(--sun); box-shadow: -5px 0 0 -3px var(--sun), 5px 0 0 -3px var(--sun), 0 -5px 0 -3px var(--sun), 0 5px 0 -3px var(--sun); }
+.pixel-stage { min-height: 0; position: relative; overflow: hidden; background: #315d53 url('assets/greenhouse-background-clean-v2.png') center 58% / cover no-repeat; image-rendering: pixelated; }.scene-atmosphere { position: absolute; inset: 0; z-index: 1; pointer-events: none; background: linear-gradient(180deg, rgba(244,250,222,.05), rgba(14,45,32,.08)); mix-blend-mode: soft-light; }.plot-field { position: absolute; inset: 0; z-index: 2; }.creature.plot { position: absolute; left: var(--plot-x); top: var(--plot-y); display: grid; justify-items: center; gap: 0; width: 132px; border: 0; color: var(--ink); background: transparent; padding: 0; transform: translate(-50%,-70%); animation: plot-arrive 300ms var(--delay) both steps(4, end); }.creature__art { width: 94px; height: 94px; display: grid; place-items: end center; filter: drop-shadow(3px 4px 0 rgba(13,38,31,.26)); }.plant-art, .animal-art { width: 94px; height: 94px; display: block; overflow: visible; image-rendering: pixelated; }.creature__caption { max-width: 132px; display: grid; justify-items: center; gap: 1px; padding: 4px 6px; color: var(--cream); background: rgba(23,58,53,.88); border: 2px solid #d4e7c4; box-shadow: 2px 2px 0 #15372f; opacity: .9; }.creature__caption strong { max-width: 112px; overflow: hidden; font-size: 10px; font-weight: 900; text-overflow: ellipsis; white-space: nowrap; }.creature__caption small { display: inline-flex; align-items: center; gap: 4px; color: #d2e9bc; font-family: var(--pixel); font-size: 8px; }.creature__caption .status-dot { width: 5px; height: 5px; }.creature.plot:hover .creature__caption, .creature.plot.is-selected .creature__caption { color: var(--ink); background: var(--sun); border-color: var(--ink); }.creature.plot.is-selected .creature__art { transform: translateY(-4px); filter: drop-shadow(4px 6px 0 rgba(13,38,31,.36)); }.creature.plot.is-selected::after { content: ""; position: absolute; top: 76px; width: 84px; height: 12px; border: 3px solid #f6e697; opacity: .9; }
+
+/* Back shelves are intentionally quieter. The three projects with the most real
+   progress in the past 21 days stay on the foreground display. */
+.greenhouse-rack { display: none; }
+.front-garden, .back-shelf-projects { position: absolute; inset: 0; }.back-shelf-projects { z-index: 2; }.front-garden { z-index: 4; }.creature.front-plant { position: absolute; left: var(--plot-x); top: var(--plot-y); display: grid; justify-items: center; gap: 0; width: 146px; border: 0; color: var(--ink); background: transparent; padding: 0; transform: translate(-50%,-70%); animation: plot-arrive 300ms var(--delay) both steps(4,end); }.front-plant .creature__art { width: 112px; height: 112px; }.front-plant .plant-art, .front-plant .animal-art { width: 112px; height: 112px; }.front-plant.is-plant-hovered .creature__caption, .front-plant.is-selected .creature__caption { color: var(--ink); background: var(--sun); border-color: var(--ink); }.front-plant.is-selected .creature__art { transform: translateY(-5px); filter: drop-shadow(4px 7px 0 rgba(13,38,31,.38)); }.front-plant.is-selected::after { content: ""; position: absolute; top: 91px; width: 101px; height: 13px; border: 3px solid #f6e697; opacity: .9; }
+.shelf-plant { position: absolute; left: var(--shelf-x); top: var(--shelf-y); z-index: 2; width: 58px; height: 58px; display: grid; place-items: end center; border: 0; background: transparent; padding: 0; transform: translate(-50%,-83%); opacity: .92; animation: shelf-arrive 230ms var(--delay) both steps(3,end); }.shelf-plant > span { display: grid; place-items: end center; width: 54px; height: 54px; filter: drop-shadow(2px 3px 0 rgba(13,38,31,.34)); }.shelf-plant .plant-art, .shelf-plant .animal-art { width: 54px; height: 54px; }.shelf-plant:hover, .shelf-plant.is-selected { opacity: 1; }.shelf-plant:hover > span, .shelf-plant.is-selected > span { transform: translateY(-3px); filter: drop-shadow(3px 4px 0 rgba(13,38,31,.42)); }.shelf-plant.is-selected::after { content: ""; position: absolute; bottom: 3px; width: 48px; height: 5px; background: var(--sun); border: 1px solid var(--ink); }
+.scene-empty { position: absolute; inset: 0; z-index: 3; display: grid; place-items: center; align-content: center; gap: 12px; color: var(--cream); text-align: center; }.scene-empty__seed { width: 32px; height: 32px; display: block; border: 5px solid #6e4937; background: #d9a34e; box-shadow: 8px 8px 0 rgba(16,44,37,.45); }.scene-empty p { margin: 0; font-size: 14px; }.scene-empty .button { border-color: var(--cream); box-shadow: 3px 3px 0 #102d26; }
+
+/* Selected project's quiet bottom deck */
+.garden-console { min-height: 121px; display: grid; grid-template-columns: minmax(210px,1.05fr) minmax(265px,1.15fr) minmax(150px,.78fr) minmax(150px,.7fr); align-items: stretch; border-top: 3px solid var(--ink); background: #e9dfbd; }.console-project { min-width: 0; display: flex; align-items: center; gap: 9px; padding: 10px 14px; border-right: 2px solid #9fb78c; }.console-project__sprite { width: 61px; height: 61px; display: grid; place-items: center; flex: 0 0 auto; border: 2px solid var(--ink); background: var(--sky); }.console-project__sprite .pixel-plant, .console-project__sprite .pixel-animal { width: 59px; height: 59px; }.console-project h2 { max-width: 200px; overflow: hidden; margin: 3px 0; font-size: 16px; font-weight: 900; letter-spacing: -.04em; text-overflow: ellipsis; white-space: nowrap; }.console-project p:not(.eyebrow) { margin: 0; color: var(--muted); font-size: 10px; }.console-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; align-items: center; padding: 12px; border-right: 2px solid #9fb78c; }.console-actions .pixel-button { min-height: 76px; padding: 8px; font-size: 11px; line-height: 1.35; text-align: left; }.console-agent { display: grid; align-content: center; gap: 8px; padding: 11px; border-right: 2px solid #9fb78c; color: var(--pine); font-size: 10px; font-weight: 800; line-height: 1.35; }.console-agent > span { display: flex; align-items: flex-start; gap: 5px; }.console-agent svg { width: 15px; height: 15px; }.console-agent div { display: flex; gap: 9px; }.console-agent button, .privacy-footer button { border: 0; color: var(--pine); background: transparent; padding: 0; font-size: 10px; font-weight: 900; text-decoration: underline; text-underline-offset: 3px; }.console-activity { min-width: 0; padding: 12px; align-content: center; display: grid; }.activity-row { display: grid; grid-template-columns: 10px minmax(0,1fr) auto; align-items: center; gap: 4px; color: var(--muted); font-size: 10px; }.activity-row__mark { width: 6px; height: 6px; background: var(--moss); }.activity-row__mark--progress { background: var(--sun); transform: rotate(45deg); }.activity-row span:nth-child(2) { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }.activity-row time { color: #6f8b77; font-family: var(--pixel); font-size: 8px; }.activity-empty { margin: 0; color: var(--muted); font-size: 10px; line-height: 1.5; }.garden-console--empty { grid-template-columns: 1fr auto; align-items: center; padding: 13px 17px; }.garden-console--empty h2 { margin: 4px 0 2px; font-size: 17px; font-weight: 900; }.garden-console--empty p:not(.eyebrow) { margin: 0; color: var(--muted); font-size: 11px; }
+.privacy-footer { min-height: 33px; display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 7px 19px; border-top: 2px solid var(--ink); color: var(--muted); background: var(--cream); font-size: 10px; }.privacy-footer span { display: inline-flex; align-items: center; gap: 5px; }.privacy-footer svg { width: 13px; height: 13px; color: var(--moss); }
+
+/* Small always-on-top habitat */
+.app-shell--compact { height: 100vh; min-height: 0; display: block; padding: 8px; background: var(--night); }.desk-widget { min-height: calc(100vh - 16px); display: grid; grid-template-rows: auto 1fr auto auto; overflow: hidden; border: 3px solid #d2e9bc; background: #e9dfbd; box-shadow: 4px 4px 0 #0d2923; }.desk-widget__bar { min-height: 47px; display: flex; align-items: center; gap: 8px; padding: 6px 9px; border-bottom: 3px solid var(--ink); color: var(--ink); background: var(--sun); font-family: var(--pixel); font-size: 10px; font-weight: 700; }.desk-widget__bar .brand__seal { width: 27px; height: 27px; border-width: 2px; background: var(--cream); }.desk-widget__bar .brand__seal svg { width: 14px; height: 14px; }.desk-widget__bar .icon-button { width: 29px; height: 29px; margin-left: auto; border-width: 2px; box-shadow: none; background: var(--cream); }.desk-widget__main { min-height: 292px; position: relative; overflow: hidden; background: var(--sky); }.mini-stage { position: absolute; inset: 0 0 74px; overflow: hidden; background: #315d53 url('assets/greenhouse-background-clean-v2.png') center / cover no-repeat; }.desk-widget__art { position: absolute; left: 50%; bottom: -6px; z-index: 2; width: 136px; height: 136px; display: grid; place-items: end center; transform: translateX(-50%); filter: drop-shadow(4px 6px 0 rgba(13,38,31,.3)); }.desk-widget__art .pixel-plant, .desk-widget__art .pixel-animal { width: 136px; height: 136px; }.compact-copy { position: absolute; right: 0; bottom: 0; left: 0; z-index: 3; min-height: 79px; padding: 11px 17px; border-top: 3px solid var(--ink); background: var(--cream); }.compact-copy h1 { max-width: 310px; overflow: hidden; margin: 3px 0 2px; font-size: 23px; font-weight: 900; letter-spacing: -.07em; text-overflow: ellipsis; white-space: nowrap; }.status-label { color: var(--pine); font-family: var(--pixel); font-size: 9px; }.status-label--soft { color: #9b641c; }.status-label--resting { color: #8c624d; }.desk-widget__actions { display: grid; grid-template-columns: 1fr 1fr; border-top: 3px solid var(--ink); }.desk-widget__actions button { min-height: 55px; display: inline-flex; align-items: center; justify-content: center; gap: 5px; border: 0; border-right: 2px solid var(--ink); color: var(--ink); background: #dcebd3; font-size: 11px; font-weight: 900; }.desk-widget__actions button:last-child { border-right: 0; }.desk-widget__actions button:hover { background: var(--sun); }.desk-widget__actions svg { width: 15px; height: 15px; }.desk-widget__open { min-height: 36px; border: 0; border-top: 2px solid var(--ink); color: var(--cream); background: var(--night); font-family: var(--pixel); font-size: 9px; font-weight: 700; }.desk-widget__open:hover { color: var(--sun); }.desk-widget--empty { grid-template-rows: auto 1fr; }.desk-widget__empty { padding: 32px 24px; display: grid; align-content: center; justify-items: start; gap: 12px; }.desk-widget__empty h1 { margin: 0 0 10px; font-size: 40px; font-weight: 900; letter-spacing: -.08em; line-height: 1.05; }
+
+/* Modals: information stays readable; only the framing is playful */
+.modal-backdrop { position: fixed; inset: 0; z-index: 10; display: grid; place-items: center; padding: 22px; background: rgba(13,41,35,.78); }.modal { width: min(100%, 555px); max-height: calc(100vh - 44px); overflow: auto; padding: 23px; border: 3px solid var(--ink); color: var(--ink); background: var(--cream); box-shadow: 7px 7px 0 #0c2822; }.modal__heading { display: flex; align-items: flex-start; justify-content: space-between; gap: 15px; }.modal__heading h2 { margin: 4px 0 0; font-size: 29px; font-weight: 900; letter-spacing: -.07em; line-height: 1.1; }.modal__heading p:not(.eyebrow) { margin: 8px 0 0; color: var(--muted); font-size: 12px; }.form-stack { display: grid; gap: 18px; margin-top: 22px; }.form-stack label, .prompt-label { display: grid; gap: 7px; color: var(--ink); font-size: 12px; font-weight: 800; }.form-stack input[type="text"], .form-stack input:not([type]), .form-stack textarea, .form-stack input[name="name"], .form-stack input[name="title"], .prompt-label textarea { width: 100%; border: 2px solid var(--ink); border-radius: 0; color: var(--ink); background: #fffdf5; padding: 10px; font-size: 14px; }.form-stack textarea, .prompt-label textarea { resize: vertical; line-height: 1.55; }.form-stack fieldset { border: 0; padding: 0; margin: 0; }.form-stack legend { margin-bottom: 8px; font-size: 12px; font-weight: 800; }.choice-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 7px; }.choice-grid--two { grid-template-columns: repeat(3, minmax(0, 1fr)); }.mini-choice { min-height: 71px; display: grid !important; align-content: start; gap: 2px !important; border: 2px solid #9fb78c; padding: 9px; background: #fffdf5; cursor: pointer; }.mini-choice:hover { background: #dcebd3; }.mini-choice:has(input:checked) { border-color: var(--ink); background: var(--sun); box-shadow: 2px 2px 0 var(--ink); }.mini-choice input { position: absolute; opacity: 0; pointer-events: none; }.mini-choice span { font-size: 12px; font-weight: 900; }.mini-choice small { color: var(--muted); font-size: 10px; font-weight: 500; line-height: 1.35; }.form-note { margin: -4px 0 0; color: var(--muted); font-size: 10px; line-height: 1.55; }.form-error { min-height: 16px; margin-top: -10px; color: var(--danger); font-size: 11px; }.modal__footer { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-top: 3px; }.code-display { display: grid; gap: 3px; margin: 22px 0 15px; padding: 13px; border: 3px solid var(--ink); background: var(--sky); box-shadow: 3px 3px 0 var(--ink); }.code-display span { color: var(--pine); font-family: var(--pixel); font-size: 9px; font-weight: 700; letter-spacing: .08em; }.code-display strong { font-family: var(--pixel); font-size: 23px; letter-spacing: .04em; }.prompt-label { margin-top: 15px; }.prompt-label textarea { min-height: 162px; font-family: var(--pixel); font-size: 10px; font-weight: 500; }.privacy-list { display: grid; margin-top: 20px; border-top: 2px solid #9fb78c; }.privacy-list > div { display: grid; grid-template-columns: 25px 1fr; gap: 9px; padding: 12px 0; border-bottom: 2px solid #9fb78c; }.privacy-list svg { color: var(--moss); }.privacy-list strong, .privacy-list small { display: block; }.privacy-list strong { font-size: 12px; }.privacy-list small { margin-top: 3px; color: var(--muted); font-size: 11px; }
+
+/* Project visibility is reversible. The menu stays compact so it doesn't feel
+   like a second settings panel next to the plant ledger. */
+.context-menu-backdrop { position: fixed; inset: 0; z-index: 25; background: transparent; }.project-context-menu { position: fixed; left: var(--menu-x); top: var(--menu-y); width: 214px; border: 3px solid var(--ink); color: var(--ink); background: var(--cream); box-shadow: 5px 5px 0 rgba(13,41,35,.86); }.project-context-menu p { overflow: hidden; margin: 0; padding: 9px 10px 7px; border-bottom: 2px solid #9fb78c; color: var(--muted); font-size: 11px; font-weight: 800; text-overflow: ellipsis; white-space: nowrap; }.project-context-menu button { width: 100%; display: grid; gap: 2px; border: 0; color: var(--ink); background: transparent; padding: 11px 10px; text-align: left; font-size: 12px; font-weight: 900; }.project-context-menu button:hover, .project-context-menu button:focus-visible { background: #dcebd3; outline: 0; }.project-context-menu button span { color: var(--muted); font-family: var(--pixel); font-size: 8px; font-weight: 700; }.hidden-project-list { display: grid; gap: 7px; margin: 18px 0; }.hidden-project-list article { min-height: 58px; display: grid; grid-template-columns: 43px minmax(0,1fr) auto; align-items: center; gap: 9px; border: 2px solid #9fb78c; padding: 7px; background: #edf1dc; }.hidden-project-list__art { width: 39px; height: 42px; display: grid; place-items: center; overflow: hidden; border: 2px solid var(--ink); background: var(--sky); }.hidden-project-list strong, .hidden-project-list small { display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }.hidden-project-list strong { font-size: 12px; }.hidden-project-list small { margin-top: 2px; color: var(--muted); font-size: 10px; }.hidden-project-list button { min-height: 30px; padding: 5px 8px; font-size: 10px; }
+
+/* Generated artwork is a four-cell growth sheet: each project selects its
+   visual stage without ever sending its name or progress off this device. */
+.plant-sprite { width: 94px; height: 94px; display: block; background-image: url('assets/nasturtium-vine-body-sprites-v3.png'); background-repeat: no-repeat; background-size: 200% 200%; image-rendering: pixelated; transform-origin: 50% 91%; transition: filter 360ms ease, transform 360ms ease, opacity 360ms ease; }
+.plant-sprite.species-body-african-violet { background-image: url('assets/african-violet-body-sprites-v1.png'); }
+.plant-sprite.species-body-monstera { background-image: url('assets/monstera-body-sprites-v1.png'); }
+.plant-sprite.species-body-haworthia { background-image: url('assets/haworthia-body-sprites-v1.png'); }
+.plant-sprite.species-body-phalaenopsis-orchid { background-image: url('assets/phalaenopsis-orchid-body-sprites-v1.png'); }
+.plant-sprite.species-body-birds-nest-fern { background-image: url('assets/birds-nest-fern-body-sprites-v1.png'); }
+.plant-sprite.species-body-hoya-carnosa { background-image: url('assets/hoya-carnosa-body-sprites-v1.png'); }
+.plant-sprite.species-body-calathea-orbifolia { background-image: url('assets/calathea-orbifolia-body-sprites-v1.png'); }
+.plant-sprite.species-body-peace-lily { background-image: url('assets/peace-lily-body-sprites-v1.png'); }
+.plant-sprite.species-body-hydrangea { background-image: url('assets/hydrangea-body-sprites-v1.png'); }
+.plant-sprite.species-body-anthurium { background-image: url('assets/anthurium-body-sprites-v1.png'); }
+.plant-sprite.stage-0 { background-position: 0 0; }
+.plant-sprite.stage-1 { background-position: 100% 0; }
+.plant-sprite.stage-2 { background-position: 0 100%; }
+.plant-sprite.stage-3 { background-position: 100% 100%; }
+.project-row__mark .plant-sprite { width: 38px; height: 38px; }
+.front-plant .plant-sprite { width: 112px; height: 112px; }
+.shelf-plant .plant-sprite { width: 54px; height: 54px; }
+.console-project__sprite .plant-sprite { width: 59px; height: 59px; }
+.desk-widget__art .plant-sprite { width: 136px; height: 136px; }
+/* Before its real species is unlocked, every project shares this generated
+   four-cell seed sheet: seed in pot → soil break → two leaves → young sprout. */
+.seed-sprite { width: 94px; height: 94px; display: block; background-image: url('assets/idea-seed-sprites-v1.png'); background-repeat: no-repeat; background-size: 200% 200%; image-rendering: pixelated; transform-origin: 50% 91%; transition: filter 360ms ease, transform 360ms ease, opacity 360ms ease; }
+.seed-sprite.stage-0 { background-position: 0 0; }.seed-sprite.stage-1 { background-position: 100% 0; }.seed-sprite.stage-2 { background-position: 0 100%; }.seed-sprite.stage-3 { background-position: 100% 100%; }
+.project-row__mark .seed-sprite { width: 38px; height: 38px; }.front-plant .seed-sprite { width: 128px; height: 128px; }.shelf-plant .seed-sprite { width: 54px; height: 54px; }.console-project__sprite .seed-sprite { width: 59px; height: 59px; }.desk-widget__art .seed-sprite { width: 136px; height: 136px; }
+.plant-sprite.vitality-soft, .seed-sprite.vitality-soft { filter: saturate(.82) brightness(.96); transform: translateY(3px) rotate(1.2deg); }
+.plant-sprite.vitality-yellow, .seed-sprite.vitality-yellow { filter: sepia(.38) saturate(.78) hue-rotate(-16deg) brightness(.91); transform: translateY(5px) rotate(2.5deg); }
+.plant-sprite.vitality-resting, .seed-sprite.vitality-resting { filter: grayscale(.30) sepia(.62) saturate(.66) brightness(.75); opacity: .87; transform: translateY(8px) rotate(4deg); }
+.status-dot--yellow { background: #cf9c36; }.status-label--yellow { color: #8c641b; }
+
+.species-unlock { border: 2px solid #7ca163 !important; padding: 11px !important; background: #edf5df; }.species-unlock legend { padding: 0 4px; color: var(--pine); }.species-unlock__choice { display: grid !important; grid-template-columns: 18px minmax(0,1fr); align-items: start; gap: 9px !important; cursor: pointer; }.species-unlock__choice input { width: 16px; height: 16px; margin: 2px 0 0; accent-color: #467b4d; }.species-unlock__choice strong { display: block; color: var(--pine); font-size: 12px; }.species-unlock__choice small { display: block; margin-top: 3px; color: var(--muted); font-size: 10px; font-weight: 500; line-height: 1.45; }.species-unlock:has(input:checked) { border-color: var(--ink) !important; background: #f6d769; box-shadow: 3px 3px 0 var(--ink); }
+.milestone-toast { position: fixed; right: 22px; bottom: 22px; z-index: 30; width: min(330px, calc(100vw - 44px)); display: grid; grid-template-columns: 25px minmax(0,1fr); gap: 8px; border: 3px solid var(--ink); padding: 11px 12px; color: var(--ink); background: #f6d769; box-shadow: 5px 5px 0 #143b30; animation: milestone-arrive 360ms both steps(4,end); }.milestone-toast svg { width: 22px; height: 22px; }.milestone-toast strong, .milestone-toast small { display: block; }.milestone-toast strong { font-size: 12px; }.milestone-toast small { margin-top: 2px; color: #315841; font-size: 10px; line-height: 1.4; }
+
+/* Bring the three current projects closer to the viewer; the rear pots sit on
+   an actual shelf baseline with a compact contact shadow instead of floating. */
+.creature.front-plant { width: clamp(146px, 14vw, 160px); }.front-plant .creature__art, .front-plant .plant-sprite { width: clamp(104px, 10.5vw, 116px); height: clamp(104px, 10.5vw, 116px); }.front-plant .seed-sprite, .front-plant .plant-composite { width: clamp(108px, 10.8vw, 118px); height: clamp(108px, 10.8vw, 118px); }
+.shelf-plant { width: 54px; height: 54px; transform: translate(-50%,-67%); animation: shelf-arrive-grounded 230ms var(--delay) both steps(3,end); }.shelf-plant::before { content: ''; position: absolute; z-index: 0; bottom: 3px; width: 29px; height: 4px; background: rgba(16,39,29,.55); box-shadow: 4px 1px 0 rgba(12,31,24,.20); }.shelf-plant > span { width: 50px; height: 50px; position: relative; z-index: 1; }.shelf-plant .plant-sprite, .shelf-plant .seed-sprite, .shelf-plant .plant-composite { width: 50px; height: 50px; }.shelf-plant .stage-0, .shelf-plant .stage-1 { margin-top: 0; }
+
+/* Plants live inside the stage, so their physical size follows the available
+   desktop height instead of keeping a fixed pixel size when the window is
+   short. Their positions stay percentage-based and therefore keep the same
+   garden composition at every supported window size. */
+.pixel-stage { --front-plant-size: clamp(78px, 15vh, 118px); --rear-plant-size: clamp(36px, 6.5vh, 50px); }
+.creature.front-plant { width: calc(var(--front-plant-size) * 1.36); }.front-plant .creature__art, .front-plant .plant-sprite, .front-plant .seed-sprite, .front-plant .plant-composite { width: var(--front-plant-size); height: var(--front-plant-size); }.front-plant .creature__caption { max-width: calc(var(--front-plant-size) * 1.25); padding: clamp(3px, .55vh, 4px) 6px; }.front-plant .creature__caption strong { max-width: calc(var(--front-plant-size) * 1.08); font-size: clamp(8px, 1.3vh, 10px); }.front-plant .creature__caption small { font-size: clamp(7px, 1vh, 8px); }.front-plant.is-selected::after { top: calc(var(--front-plant-size) * .78); width: calc(var(--front-plant-size) * .82); height: clamp(8px, 1.35vh, 13px); }
+.shelf-plant { width: calc(var(--rear-plant-size) + 4px); height: calc(var(--rear-plant-size) + 4px); }.shelf-plant > span, .shelf-plant .plant-sprite, .shelf-plant .seed-sprite, .shelf-plant .plant-composite { width: var(--rear-plant-size); height: var(--rear-plant-size); }.shelf-plant::before { width: calc(var(--rear-plant-size) * .58); }
+
+/* Rear projects use their own restrained terracotta-pots asset, deliberately
+   matching the three decorative pots painted into the greenhouse shelf. */
+.shelf-plant > .shelf-project-pot { width: var(--rear-plant-size); height: var(--rear-plant-size); display: block; background: url('assets/shelf-project-pot-v1.png') center 58% / 210% no-repeat; filter: drop-shadow(1px 2px 0 rgba(12,31,24,.38)); transition: filter 140ms steps(2,end), transform 140ms steps(2,end); }.shelf-plant > .shelf-plant__tooltip { position: absolute; left: 50%; bottom: calc(100% - 3px); z-index: 7; width: max-content; max-width: 144px; display: grid; gap: 1px; border: 2px solid #d4e7c4; padding: 4px 6px; color: var(--cream); background: rgba(18,51,44,.94); box-shadow: 2px 2px 0 #15372f; opacity: 0; pointer-events: none; transform: translate(-50%, -4px); transition: opacity 120ms ease, transform 120ms steps(2,end); }.shelf-plant__tooltip strong, .shelf-plant__tooltip small { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }.shelf-plant__tooltip strong { font-size: 10px; font-weight: 900; }.shelf-plant__tooltip small { color: #d2e9bc; font-family: var(--pixel); font-size: 8px; }.shelf-plant:hover, .shelf-plant:focus-visible { z-index: 8; opacity: 1; outline: 0; }.shelf-plant:hover > .shelf-project-pot, .shelf-plant:focus-visible > .shelf-project-pot { filter: drop-shadow(-1px 0 0 #f6e697) drop-shadow(1px 0 0 #f6e697) drop-shadow(0 -1px 0 #f6e697) drop-shadow(0 1px 0 #f6e697) brightness(1.12) saturate(1.14) drop-shadow(2px 3px 0 rgba(12,31,24,.52)); transform: translateY(-2px); }.shelf-plant:hover > .shelf-plant__tooltip, .shelf-plant:focus-visible > .shelf-plant__tooltip { opacity: 1; transform: translate(-50%, -8px); }.front-plant.is-selected::after { display: none; }
+
+/* The foreground layer spans the full panorama. Let its empty space remain
+   transparent to the mouse, so a rear shelf pot can still be inspected. */
+.shelf-plant > .shelf-project-pot { background: url('assets/shelf-project-pot-transparent-v3.png') center / 100% 100% no-repeat; }
+.front-garden { pointer-events: none; }.front-garden .front-plant { pointer-events: auto; }
+
+/* The JS maps each pot to an exact board in the source artwork. Treat its
+   `top` as the board surface, not as the centre of the pot, so the transparent
+   asset physically rests on every shelf instead of drifting below it. */
+.shelf-plant { transform: translate(-50%, -100%); animation: shelf-arrive-on-rack 230ms var(--delay) both steps(3,end); }
+.shelf-plant::before { bottom: -1px; }
+@keyframes shelf-arrive-on-rack { from { opacity: 0; transform: translate(-50%,-89%); } to { opacity: .92; transform: translate(-50%,-100%); } }
+
+/* Keep the automatic-sync state below the project actions: it is reassuring
+   metadata, not a third competing panel in the main control row. */
+.garden-console { min-height: 0; grid-template-columns: minmax(210px,1.05fr) minmax(286px,1.32fr) minmax(160px,.74fr); grid-template-rows: minmax(76px,1fr) auto; grid-template-areas: 'project actions activity' 'agent agent agent'; }.console-project { grid-area: project; }.console-actions { grid-area: actions; grid-template-columns: repeat(3, minmax(0,1fr)); }.console-actions .pixel-button { min-height: clamp(56px, 9vh, 68px); padding: 7px; font-size: 10px; }.console-agent { grid-area: agent; min-height: 38px; display: flex; align-items: center; justify-content: space-between; gap: 18px; border-top: 2px solid #9fb78c; border-right: 0; padding: 7px 14px; }.console-agent > span { align-items: center; }.console-agent div { align-items: center; }.console-activity { grid-area: activity; }
+.sync-guide { display: grid; gap: 7px; margin-top: 20px; }.sync-guide article { display: grid; grid-template-columns: 28px minmax(0,1fr); gap: 10px; align-items: start; border: 2px solid #9fb78c; padding: 10px 11px; background: #edf1dc; }.sync-guide article:nth-child(2) { background: #f6f0d6; }.sync-guide article:nth-child(3) { background: #e4f1e6; }.sync-guide svg { width: 19px; height: 19px; margin-top: 1px; color: var(--moss); }.sync-guide strong { display: block; color: var(--pine); font-size: 12px; font-weight: 900; line-height: 1.3; }.sync-guide p { margin: 3px 0 0; color: var(--muted); font-size: 11px; line-height: 1.58; }.sync-adoption-note { margin: 12px 0 0; border-left: 3px solid var(--sun); padding: 7px 0 7px 10px; color: var(--muted); font-size: 11px; line-height: 1.6; }
+@media (max-width: 1080px) { .garden-console { grid-template-columns: minmax(195px,1fr) minmax(260px,1.15fr); grid-template-areas: 'project actions' 'agent agent'; }.console-activity { display: none; } }
+@keyframes plot-arrive { from { opacity: 0; transform: translate(-50%,-64%); } to { opacity: 1; transform: translate(-50%,-70%); } }
+@keyframes shelf-arrive { from { opacity: 0; transform: translate(-50%,-72%); } to { opacity: .88; transform: translate(-50%,-83%); } }
+@keyframes shelf-arrive-grounded { from { opacity: 0; transform: translate(-50%,-56%); } to { opacity: .92; transform: translate(-50%,-67%); } }
+@keyframes milestone-arrive { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+@media (max-width: 1080px) { .topbar__right { gap: 7px; }.privacy-chip { display: none; } }
+@media (max-width: 760px) { .topbar { padding: 0 12px; }.brand small, .mode-switch { display: none; }.workspace { display: block; }.project-shelf { max-height: 245px; border-right: 0; border-bottom: 3px solid var(--ink); }.project-list { grid-template-columns: repeat(2, minmax(0,1fr)); }.shelf-footer { display: none; }.pixel-stage { min-height: 410px; }.panorama__heading { padding: 13px; }.sun-clock { display: none; }.garden-console { grid-template-columns: 1fr; }.console-project, .console-actions, .console-agent { border-right: 0; border-bottom: 2px solid #9fb78c; }.console-actions .pixel-button { min-height: 52px; }.console-agent { grid-template-columns: 1fr auto; align-items: center; }.console-agent div { justify-content: end; }.privacy-footer { display: none; }.habitat-choices { grid-template-columns: 1fr; }.onboarding { grid-template-columns: 18px 1fr 18px; }.onboarding h1 { font-size: 42px; }.choice-grid, .choice-grid--two { grid-template-columns: 1fr; }.modal { padding: 19px; } }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; transition-duration: .01ms !important; } }
+
+/* A vine and its flowers are intentionally separate elements. The support and
+   leaves grow vertically from cell to cell; flower parts attach at leaf nodes
+   and can gain or lose condition without redrawing the whole plant. */
+.plant-composite { width: 94px; height: 94px; position: relative; display: block; overflow: visible; transform-origin: 50% 91%; transition: filter 360ms ease, transform 360ms ease, opacity 360ms ease; }
+.plant-body { position: absolute; inset: 0; display: block; }
+.plant-composite .plant-sprite { width: 100%; height: 100%; }
+.plant-flowers { position: absolute; inset: 0; pointer-events: none; }
+.plant-organs { position: absolute; inset: 0; pointer-events: none; }
+.flower-part { position: absolute; left: var(--flower-x); top: var(--flower-y); width: 36%; height: 36%; display: block; background-image: url('assets/nasturtium-flower-parts-v1.png'); background-repeat: no-repeat; background-size: 200% 200%; image-rendering: pixelated; transform: translate(-50%,-100%) rotate(var(--flower-tilt)); transform-origin: 50% 100%; transition: filter 360ms ease, opacity 360ms ease, transform 360ms ease; }
+.flower-part--bud { background-position: 0 0; }.flower-part--opening { background-position: 100% 0; }.flower-part--bloom { background-position: 0 100%; }.flower-part--faded { background-position: 100% 100%; }
+.growth-organ { position: absolute; left: var(--organ-x); top: var(--organ-y); width: var(--organ-size); height: var(--organ-size); display: block; background-repeat: no-repeat; background-size: 200% 200%; image-rendering: pixelated; transform: translate(-50%,-100%) rotate(var(--organ-tilt)); transform-origin: 50% 100%; transition: opacity 360ms ease, transform 360ms ease; }
+.growth-organ--african-violet { background-image: url('assets/african-violet-growth-parts-v1.png'); }
+.growth-organ--monstera { background-image: url('assets/monstera-growth-parts-v1.png'); }
+.growth-organ--haworthia { background-image: url('assets/haworthia-growth-parts-v1.png'); }
+.growth-organ--bud { background-position: 0 0; }.growth-organ--opening { background-position: 100% 0; }.growth-organ--bloom { background-position: 0 100%; }.growth-organ--faded { background-position: 100% 100%; }
+.growth-organ--bud { transform: translate(-50%,-92%) scale(.72) rotate(var(--organ-tilt)); }.growth-organ--opening { transform: translate(-50%,-97%) scale(.87) rotate(var(--organ-tilt)); }.growth-organ--bloom { transform: translate(-50%,-100%) scale(1) rotate(var(--organ-tilt)); }
+.plant-composite.vitality-soft { filter: saturate(.84) brightness(.96); transform: translateY(3px) rotate(1.2deg); }.plant-composite.vitality-soft .flower-part { transform: translate(-50%,-94%) rotate(7deg); opacity: .9; }.plant-composite.vitality-soft .growth-organ { opacity: .9; transform: translate(-50%,-94%) rotate(7deg); }
+.plant-composite.vitality-yellow { filter: sepia(.33) saturate(.8) hue-rotate(-16deg) brightness(.91); transform: translateY(5px) rotate(2.5deg); }.plant-composite.vitality-yellow .flower-part { transform: translate(-50%,-90%) rotate(12deg); opacity: .73; }.plant-composite.vitality-yellow .growth-organ { opacity: .73; transform: translate(-50%,-90%) rotate(12deg); }
+.plant-composite.vitality-resting { filter: grayscale(.3) sepia(.58) saturate(.68) brightness(.75); opacity: .87; transform: translateY(8px) rotate(4deg); }.plant-composite.vitality-resting .flower-part { transform: translate(-50%,-83%) rotate(18deg); opacity: .52; }.plant-composite.vitality-resting .growth-organ { opacity: .52; transform: translate(-50%,-83%) rotate(18deg); }
+.project-row__mark .plant-composite { width: 38px; height: 38px; }.front-plant .plant-composite { width: 128px; height: 128px; }.shelf-plant .plant-composite { width: 54px; height: 54px; }.console-project__sprite .plant-composite { width: 59px; height: 59px; }.desk-widget__art .plant-composite { width: 136px; height: 136px; }
+
+/* Decoration is deliberately separate from plant growth: real work changes the
+   organism; anonymous insight rewards only change the room around it. */
+.decor-corner-button { min-height: 32px; border: 2px solid var(--ink); color: var(--ink); background: #f6e697; box-shadow: 2px 2px 0 var(--ink); padding: 5px 9px; font-family: var(--pixel); font-size: 9px; font-weight: 700; }.decor-corner-button:hover { background: #fff3a5; transform: translate(-1px,-1px); box-shadow: 3px 3px 0 var(--ink); }
+.plant-pot-trim { position: absolute; z-index: 2; left: 50%; top: 73%; width: 38%; height: 10%; border: 2px solid #704031; transform: translateX(-50%); image-rendering: pixelated; pointer-events: none; }.plant-pot-trim--pot-terracotta { background: #c76b49; box-shadow: 4px 3px 0 #8e4c3a; }.plant-pot-trim--pot-cream { background: #e6d4a0; border-color: #8f7856; box-shadow: 4px 3px 0 #b9a878; }.plant-pot-trim--pot-moss { background: #688b62; border-color: #385547; box-shadow: 4px 3px 0 #466744; }.plant-organs { z-index: 3; }
+.scene-prop { display: none; } /* Foreground props now use painted scene variants. */
+.pixel-stage.decor-shelf-shelf-brass::before, .mini-stage.decor-shelf-shelf-brass::before { content: ''; position: absolute; z-index: 2; right: 1%; top: 44%; width: 42%; height: 3px; border-top: 2px solid #f2d681; border-bottom: 2px solid #74582b; box-shadow: 0 49px 0 #f2d681, 0 51px 0 #74582b; pointer-events: none; }
+.decor-rule { margin: 12px 0; padding: 9px 11px; border-left: 4px solid var(--sun); color: #405a4c; background: #edf1dc; font-size: 12px; line-height: 1.5; }.decor-grid { display: grid; gap: 12px; }.decor-group { display: grid; gap: 6px; }.decor-group .eyebrow { margin: 3px 0 0; }.decor-card { display: grid; grid-template-columns: 42px 1fr auto; align-items: center; gap: 10px; min-height: 58px; padding: 7px; border: 2px solid #a4b699; background: #f6f1da; }.decor-card.is-active { border-color: var(--pine); background: #dcebd3; }.decor-card strong, .decor-card small { display: block; }.decor-card strong { font-size: 13px; }.decor-card small { margin-top: 2px; color: #607160; font-size: 11px; line-height: 1.25; }.decor-card button { min-height: 30px; padding: 5px 8px; font-size: 10px; white-space: nowrap; }.decor-card button:disabled { cursor: default; opacity: .5; }.decor-card__preview { width: 36px; height: 36px; position: relative; display: block; border: 2px solid #5b6a55; background: #d3e2bd; }.decor-card__preview--pot-terracotta::before, .decor-card__preview--pot-cream::before, .decor-card__preview--pot-moss::before { content: ''; position: absolute; left: 6px; bottom: 5px; width: 19px; height: 13px; border: 2px solid #704031; background: #c76b49; }.decor-card__preview--pot-cream::before { border-color: #8f7856; background: #e6d4a0; }.decor-card__preview--pot-moss::before { border-color: #385547; background: #688b62; }.decor-card__preview--shelf-wood { background: repeating-linear-gradient(0deg, #8d5730 0 7px, #4f3525 7px 10px); }.decor-card__preview--shelf-brass { background: repeating-linear-gradient(0deg, #8d5730 0 7px, #4f3525 7px 10px); box-shadow: inset 0 3px #f2d681, inset 0 -3px #74582b; }.decor-card__preview--prop-watering-can::before { content: ''; position: absolute; left: 8px; bottom: 7px; width: 16px; height: 13px; border: 3px solid #3f6d6e; background: #8fb7ae; }.decor-card__preview--prop-shovel::before { content: ''; position: absolute; left: 16px; top: 3px; width: 4px; height: 23px; background: #936040; transform: rotate(-20deg); }.decor-card__preview--prop-shovel::after { content: ''; position: absolute; left: 9px; bottom: 2px; width: 15px; height: 11px; border: 2px solid #314e50; background: #85a9a3; }.decor-card__preview--prop-seed-box::before { content: ''; position: absolute; left: 4px; bottom: 5px; width: 23px; height: 14px; border: 3px solid #5d3e27; background: #b88247; }
+
+@media (prefers-reduced-motion: reduce) { .plant-composite, .flower-part, .growth-organ { transition: none; } }
+
+/* Desktop polish: keep feedback local, and keep art grounded when UI updates. */
+.front-plant, .shelf-plant { animation: none !important; }
+.front-plant.is-arriving { animation: plot-arrive 300ms var(--delay) both steps(4,end) !important; }
+.shelf-plant.is-arriving { animation: shelf-arrive-on-rack 230ms var(--delay) both steps(3,end) !important; }
+.front-plant .plant-composite { width: var(--front-plant-size); height: var(--front-plant-size); }
+/* The lower Monstera atlas cells start above the halfway line. Expand their
+   viewport upward while keeping the sheet's pixel scale and pot baseline. */
+.plant-composite .plant-body .species-body-monstera:is(.stage-2, .stage-3) {
+  position: absolute; left: 0; bottom: 0; width: 100%; height: 112.5%;
+  background-size: 200% 177.777778%;
+}
+/* Keep the source pot's 70:52 aspect ratio; its bottom sits on the board. */
+.shelf-plant > .shelf-project-pot { height: calc(var(--rear-plant-size) * 52 / 70); }
+.front-plant .creature__art, .console-project__sprite { position: relative; }
+.front-plant.is-selected .creature__art { transform: none; }
+.front-plant:focus-visible { outline: none; }
+.front-plant.is-plant-hovered .creature__art, .front-plant:focus-visible .creature__art {
+  filter: drop-shadow(1px 0 0 #f6e697) drop-shadow(-1px 0 0 #f6e697) drop-shadow(0 1px 0 #f6e697) drop-shadow(0 -1px 0 #f6e697);
+}
+.front-plant:focus-visible .creature__caption { background: var(--sun); color: var(--ink); }
+.shelf-plant:hover > .shelf-project-pot, .shelf-plant:focus-visible > .shelf-project-pot, .shelf-plant.is-selected > .shelf-project-pot { transform: none; }
+.shelf-plant.is-selected > .shelf-project-pot { filter: drop-shadow(-1px 0 0 #f6e697) drop-shadow(1px 0 0 #f6e697) drop-shadow(0 -1px 0 #f6e697) drop-shadow(0 1px 0 #f6e697); }
+.shelf-plant.is-selected::after { display: none; }
+.shelf-plant > .shelf-plant__tooltip {
+  height: auto; min-height: 0; max-width: 200px; padding: 7px 9px; gap: 4px;
+  border-width: 1px; box-shadow: 2px 2px 0 #15372f;
+}
+.shelf-plant__tooltip strong { font-size: 12px; line-height: 1.4; }
+.shelf-plant__tooltip small { font-family: var(--sans); font-size: 10px; line-height: 1.4; }
+.shelf-plant__tooltip strong { white-space: normal; overflow-wrap: anywhere; }
+
+/* Reuse the source sprite's texture and alpha for the coloured lower pot. */
+.plant-pot-trim {
+  inset: 0; width: 100%; height: 100%; border: 0; background: none;
+  box-shadow: none; transform: none; clip-path: inset(80% 0 0);
+}
+.plant-pot-trim--pot-terracotta { display: none; }
+.plant-pot-trim--pot-cream { filter: grayscale(1) sepia(.5) brightness(1.65); }
+.plant-pot-trim--pot-moss { filter: hue-rotate(65deg) saturate(.45) brightness(.85); }
+.pixel-stage.decor-shelf-shelf-brass::before, .mini-stage.decor-shelf-shelf-brass::before { display: none; }
+.rack-trim { display: none; position: absolute; inset: 0; z-index: 2; pointer-events: none; }
+.decor-shelf-shelf-brass .rack-trim { display: block; }
+.rack-trim i { position: absolute; left: var(--rack-left); width: var(--rack-width); height: 3px; background: #b39155; border-top: 1px solid #e6cf8d; box-shadow: 0 1px 0 #65472c; }
+.rack-trim i:nth-child(1) { top: var(--rack-line-0); }
+.rack-trim i:nth-child(2) { top: var(--rack-line-1); }
+.rack-trim i:nth-child(3) { top: var(--rack-line-2); }
+
+.console-project__copy { min-width: 0; }
+.console-project .console-status { display: flex; align-items: center; gap: 5px; margin-top: 4px; }
+.console-project .console-detail { margin-top: 4px; line-height: 1.5; }
+.console-project h2 { max-width: none; font-size: 17px; }
+.console-project p:not(.eyebrow) { font-size: 11px; }
+.console-actions .pixel-button { font-size: 12px; flex-direction: column; gap: 5px; }
+.console-agent small { font-family: var(--sans); font-size: 11px; }
+.project-row__copy strong { font-size: 13px; }
+.project-row__copy small { font-size: 11px; }
+.project-list { scrollbar-width: thin; scrollbar-color: #97ad83 transparent; }
+.project-row__mark, .console-project__sprite { background: #d6e2c4; }
+.activity-row { font-size: 11px; line-height: 1.8; }
+
+.modal { width: min(100%, 590px); scrollbar-width: thin; scrollbar-color: #97ad83 var(--cream); }
+.modal__heading { align-items: flex-start; }
+.modal__heading > div { min-width: 0; }
+.modal__heading .icon-button { flex: 0 0 35px; }
+.modal__heading h2 { font-size: 25px; line-height: 1.35; letter-spacing: -.04em; overflow-wrap: anywhere; }
+.modal__heading p:not(.eyebrow) { font-size: 13px; line-height: 1.65; }
+.modal__footer { margin-top: 16px; }
+.habitat-switch-button { background: var(--cream); white-space: nowrap; }
+.habitat-switch-button:hover { background: var(--sun); }
+.desk-widget__bar .habitat-switch-button { margin-left: auto; }
+.desk-widget__bar .habitat-switch-button + .icon-button { margin-left: 0; }
+.habitat-picker { display: grid; gap: 12px; margin-top: 22px; }
+.habitat-picker__option { display: flex; align-items: center; gap: 12px; width: 100%; min-height: 88px; padding: 14px; border: 2px solid #718566; background: #fffdf5; color: var(--ink); text-align: left; transition: background-color 120ms ease, border-color 120ms ease; }
+.habitat-picker__option:hover { border-color: var(--ink); background: #e4edda; }
+.habitat-picker__option[aria-pressed="true"] { border-color: var(--ink); background: #f5e5aa; }
+.habitat-picker__option .brand__seal { flex: 0 0 34px; width: 34px; height: 34px; }
+.habitat-picker__copy { flex: 1; min-width: 0; }
+.habitat-picker__copy strong { display: block; font-size: 17px; line-height: 1.4; }
+.habitat-picker__copy small { display: block; margin-top: 4px; color: #4e6655; font-size: 12px; line-height: 1.6; }
+.habitat-picker__status { flex: 0 0 auto; color: var(--ink); font-size: 11px; font-weight: 700; }
+/* Normalize the pottery footprint while preserving each species' silhouette. */
+.plant-display { display: block; position: relative; width: 100%; height: 100%; overflow: visible; }
+.plant-display > :is(.plant-composite, .seed-sprite, .animal-art) {
+  position: absolute; left: var(--art-left); bottom: var(--art-bottom);
+  width: calc(100% * var(--art-scale)); height: calc(100% * var(--art-scale));
+  margin: 0; transform: none;
+}
+/* Lower atlas rows are not exact square cells: preserve the stems and leaves
+   that begin just above the centre line, without including the upper pots. */
+.plant-body .plant-sprite:is(.stage-2, .stage-3) { position: absolute; left: 0; bottom: 0; }
+.plant-body .species-body-haworthia.stage-3 { height: 113%; background-size: 200% 176.99115%; }
+.plant-body .species-body-calathea-orbifolia.stage-3 { height: 106%; background-size: 200% 188.67925%; }
+.plant-body .species-body-calathea-orbifolia.stage-2 { height: 101%; background-size: 200% 198.0198%; }
+.plant-body .species-body-birds-nest-fern.stage-3 { left: -6%; width: 106%; height: 107%; background-size: 188.67925% 186.91589%; }
+.plant-body .species-body-hoya-carnosa:is(.stage-2, .stage-3) { height: 109%; background-size: 200% 183.48624%; }
+.plant-body .vine-body.stage-3 { height: 108%; background-size: 200% 185.18519%; }
+.plant-body .species-body-phalaenopsis-orchid:is(.stage-2, .stage-3) { height: 103%; background-size: 200% 194.17476%; }
+/* The top atlas cells can contain the next row's leaf tips beneath their
+   own pot. Hide that unused padding, without clipping separate growth parts. */
+.plant-body--early { clip-path: inset(-15% -10% max(0px, calc(var(--pot-padding) - 2px)) -10%); }
+.shelf-plant { width: var(--rear-plant-size); height: var(--rear-plant-size); }
+.shelf-plant > .shelf-project-art { width: 100%; height: 100%; transform: none; }
+.shelf-plant::before { width: calc(var(--rear-plant-size) * .30); height: 2px; bottom: -1px; }
+.shelf-plant:hover > .shelf-project-art, .shelf-plant:focus-visible > .shelf-project-art, .shelf-plant.is-selected > .shelf-project-art {
+  transform: none; filter: drop-shadow(-1px 0 0 #f6e697) drop-shadow(1px 0 0 #f6e697) drop-shadow(0 -1px 0 #f6e697) drop-shadow(0 1px 0 #f6e697);
+}
+html.floating-mode .app-shell--compact { padding: 0; border: 0; box-shadow: none; }
+.floating-pet { position: relative; width: 100%; height: 100%; user-select: none; }
+.floating-pet__plant { position: absolute; width: 244px; height: 244px; bottom: 24px; left: calc(50% - 122px); border: 0; padding: 0; background: transparent; cursor: grab; touch-action: none; }
+.floating-pet__plant:active { cursor: grabbing; }
+.floating-pet__plant .plant-display { filter: none; pointer-events: none; }
+/* Full-resolution art is being reduced, not enlarged from a tiny pixel grid.
+   Nearest-neighbour sampling discarded veins and made diagonal edges jagged. */
+.floating-pet :is(.plant-sprite, .seed-sprite, .flower-part, .growth-organ) { image-rendering: auto; }
+.floating-pet__plant:focus-visible { outline: none; }
+.floating-pet__plant:focus-visible .plant-display { filter: drop-shadow(-1px 0 0 #f6e697) drop-shadow(1px 0 0 #f6e697); }
+.floating-pet__menu { position: absolute; right: 67px; bottom: 22px; display: grid; place-items: center; width: 30px; height: 30px; padding: 0; border: 1px solid #b6c4a178; border-radius: 50%; color: #efe6ca; background: #284538; line-height: 1; opacity: .8; box-shadow: 0 2px 4px #081a1728; transition: opacity 120ms ease, background-color 120ms ease; }
+.floating-pet__menu svg { width: 18px; height: 18px; }
+.floating-pet__menu:hover, .floating-pet__menu:focus-visible { opacity: 1; background: #3b5b46; }
+.floating-pet__menu:focus-visible { outline: 2px solid #f6e697; outline-offset: 3px; }
+.floating-pet__tip { position: absolute; top: 8px; left: 50%; transform: translateX(-50%); max-width: 290px; width: max-content; padding: 6px 10px; background: #234637; border: 1px solid #bbcc9e; color: var(--cream); opacity: 0; pointer-events: none; transition: opacity 120ms ease; }
+.floating-pet__tip strong { display: block; max-width: 260px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 12px; }
+.floating-pet__tip small { display: block; color: #d8e5c8; font-size: 10px; line-height: 1.5; }
+.floating-pet__plant:hover + .floating-pet__tip, .floating-pet__plant:focus-visible + .floating-pet__tip { opacity: 1; }
+.floating-pet__empty { display: grid; place-items: center; width: 64px; height: 64px; margin: 160px auto 0; color: var(--cream); background: var(--pine); border: 2px solid #bbcc9e; }
+.floating-pet__empty svg { width: 32px; height: 32px; }
+html.floating-mode .milestone-toast { top: 8px; bottom: auto; left: 12px; right: 12px; width: auto; font-size: 11px; }
+@media (max-width: 480px) {
+  .habitat-picker__option { flex-wrap: wrap; gap: 8px; padding: 12px; }
+  .habitat-picker__copy { flex-basis: calc(100% - 44px); }
+  .habitat-picker__status { margin-left: 42px; }
+}
+.sync-guide strong { font-size: 14px; }
+.sync-guide p, .sync-adoption-note, .privacy-list small { font-size: 13px; line-height: 1.7; }
+.sync-guide article { padding: 12px; }
+.sync-guide article > div, .privacy-list > div > span { min-width: 0; }
+.form-note { margin: 0; font-size: 12px; line-height: 1.65; }
+.decor-card { grid-template-columns: 40px minmax(0,1fr) auto; }
+.milestone-toast { pointer-events: none; }
+.milestone-toast small { font-size: 12px; line-height: 1.6; }
+.is-cared { background: #cce6c0 !important; }
+.care-particles { position: absolute; inset: 0; display: block; pointer-events: none; z-index: 8; animation: care-finish 1100ms linear both; }
+.care-particles i { position: absolute; left: 35%; top: 10%; width: 4px; height: 7px; background: #bdf1e5; box-shadow: 1px 1px 0 #548e86; animation: care-drop 950ms steps(10,end) both; }
+.care-particles i:nth-child(2) { left: 50%; top: 5%; animation-delay: 80ms; }
+.care-particles i:nth-child(3) { left: 64%; top: 15%; animation-delay: 120ms; }
+.care-particles i:nth-child(4) { left: 42%; top: 24%; animation-delay: 50ms; }
+.care-particles i:nth-child(5) { left: 59%; top: 28%; animation-delay: 90ms; }
+@keyframes care-drop { 0% { opacity: 0; transform: translateY(-9px); } 20% { opacity: 1; } 85% { opacity: 1; } 100% { opacity: 0; transform: translateY(42px); } }
+@keyframes care-finish { to { visibility: hidden; } }
+@media (prefers-reduced-motion: reduce) {
+  .front-plant.is-arriving, .shelf-plant.is-arriving { animation: none !important; }
+  .care-particles { display: none; }
+}
+/* Local editing controls retain the garden's quiet pixel palette. */
+.pencil-button{display:inline-grid;place-items:center;flex:0 0 30px;width:30px;height:30px;padding:6px;border:0;background:transparent;color:var(--ink,#183e34);cursor:pointer;vertical-align:middle}
+.pencil-button svg{width:16px;height:16px}
+.pencil-button:hover,.pencil-button:focus-visible{background:#e4ebd2;outline:1px solid #7b9b74}
+.plant-name-line{display:flex;align-items:center;gap:4px;min-width:0}
+.plant-name-line h2{min-width:0;flex:0 1 auto}
+.growth-timeline .journal-date-line{display:flex;align-items:center;flex-wrap:wrap;gap:4px;min-height:30px}
+.growth-timeline .journal-date-line time{display:inline;margin:0}
+.journal-date-editor{display:flex;align-items:end;flex-wrap:wrap;gap:8px;margin:6px 0}
+.journal-date-editor label{display:grid;gap:4px;font-size:12px}
+.journal-date-editor input{padding:5px 8px;border:1px solid #8fac80;background:#fff9e9;color:#183e34;font:inherit;min-height:32px}
+.journal-date-editor [role=alert]{flex-basis:100%;color:#8c392d}
+.decor-card__actions{display:flex;align-items:center;justify-content:flex-end;gap:12px;flex-wrap:wrap}
+.decor-preview-banner{position:absolute;z-index:30;left:16px;right:16px;top:16px;display:flex;align-items:center;justify-content:center;gap:16px;padding:10px 14px;background:#fff9e9;border:2px solid #244b3e;box-shadow:3px 3px 0 #244b3e;font-size:13px}
+.decor-preview-banner>span{flex:1}.decor-preview-banner small{display:block;font-size:11px;color:#496447;margin-top:3px}
+.decor-preview-banner button{white-space:nowrap}
+.console-activity{position:relative;padding:28px 12px 10px}
+.activity-history-link{position:absolute;right:7px;top:3px;display:grid;place-items:center;width:26px;height:26px;padding:5px;border:0;background:transparent;color:var(--pine);cursor:pointer}
+.activity-history-link svg{width:16px;height:16px}
+.activity-history-link:hover,.activity-history-link:focus-visible{background:#dce5c7;outline:1px solid #8fac80}
+.activity-history-count{font-size:12px;color:var(--muted);margin:0 0 16px}
+.activity-history-list{list-style:none;margin:0;padding:0}
+.activity-history-entry{display:grid;grid-template-columns:10px minmax(0,1fr);gap:12px;padding:16px 0;border-bottom:1px solid #d4dec3}
+.activity-history-entry>.activity-row__mark{margin-top:8px}
+.activity-history-entry p{margin:0 0 7px;line-height:1.5;overflow-wrap:anywhere}
+.activity-history-entry time{font-size:12px;color:#536b57;font-variant-numeric:tabular-nums}
+.activity-history-entry small{display:block;margin-top:5px;color:#536b57}
+.activity-history-entry small time{font-size:11px}
+@media(max-width:1080px){.garden-console{grid-template-areas:'project actions' 'activity activity' 'agent agent'}.console-activity{display:grid;grid-template-columns:1fr 1fr;gap:2px 20px;border-top:1px solid #9fb78c;padding-top:28px}.activity-empty{grid-column:1/-1}}
+.pixel-stage.decor-prop-prop-shovel,.mini-stage.decor-prop-prop-shovel{background-image:url('assets/greenhouse-background-shovel-v2.png')}
+.pixel-stage.decor-prop-prop-seed-box,.mini-stage.decor-prop-prop-seed-box{background-image:url('assets/greenhouse-background-seedbox-v2.png')}
+.rename-current-info{display:grid;gap:14px;margin:0 0 24px;padding:16px;background:#e6ecd5;border-left:3px solid #698c60}
+.rename-current-info>div{display:grid;gap:5px}
+.rename-current-info dt{font-size:12px;color:#536b57}
+.rename-current-info dd{margin:0;overflow-wrap:anywhere;font-size:14px;font-weight:700;line-height:1.5}
+/* Reserve the same control deck regardless of a plant's recent activity count. */
+.garden-console:not(.garden-console--empty){height:161px;min-height:161px;grid-template-rows:120px 38px}
+.console-project__copy{min-width:0}
+.console-project .console-detail{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.console-activity{grid-auto-rows:20px;align-content:center}
+.garden-heading-meta{display:flex;align-items:center;justify-content:flex-end;flex-wrap:wrap;gap:4px 12px;min-width:0}
+.garden-sync-help{border:0;padding:4px 0;background:transparent;color:var(--pine);font:inherit;font-size:11px;font-weight:700;text-decoration:underline;text-underline-offset:3px;white-space:nowrap;cursor:pointer}
+.garden-sync-help:focus-visible{outline:2px solid var(--pine);outline-offset:3px}
+.rename-heading h2{min-width:0;overflow-wrap:anywhere}
+.rename-heading .icon-button{flex-shrink:0}
+.rename-info-note{display:flex;align-items:flex-start;gap:6px}
+.rename-info-note svg{width:14px;height:14px;flex:0 0 14px;margin-top:3px;fill:none;stroke:currentColor;stroke-width:1.8}
+@media(max-width:1080px){.garden-console:not(.garden-console--empty){height:245px;min-height:245px;grid-template-rows:120px 84px 38px}}
+.privacy-footer__actions, .startup-control { display: flex; align-items: center; gap: 8px; flex: 0 0 auto; }
+.privacy-footer__actions { gap: 18px; }
+.startup-control { color: var(--pine); }
+.privacy-footer .startup-toggle { position: relative; width: 32px; height: 18px; flex: 0 0 32px; padding: 2px; border: 1px solid #7a8d70; border-radius: 10px; background: #d6dcc4; cursor: pointer; text-decoration: none; }
+.privacy-footer .startup-toggle > span { display: block; width: 12px; height: 12px; border-radius: 50%; background: #fffbed; box-shadow: 0 1px 2px #25433340; transition: transform 120ms ease; }
+.privacy-footer .startup-toggle[aria-checked="true"] { background: #526e4e; border-color: #526e4e; }
+.privacy-footer .startup-toggle[aria-checked="true"] > span { transform: translateX(14px); }
+.privacy-footer .startup-toggle:disabled { opacity: .55; cursor: default; }
+.privacy-footer .startup-help { display: grid; place-items: center; width: 24px; height: 24px; border: 0; padding: 0; background: transparent; color: var(--muted); font-size: 10px; font-weight: 700; text-decoration: none; cursor: pointer; position: relative; }
+.startup-help::before { content: ''; position: absolute; inset: 5px; border: 1px solid currentColor; border-radius: 50%; }
+.startup-help:hover { color: var(--ink); }
+.startup-toggle:focus-visible, .startup-help:focus-visible { outline: 2px solid var(--pine); outline-offset: 3px; }
+.startup-status { position: absolute; width: 1px; height: 1px; padding: 0; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.startup-control.has-error .startup-help { color: var(--danger); }
+.startup-description { margin-top: 22px; font-size: 13px; line-height: 1.8; }
+.startup-description p { margin: 0 0 14px; }
+@media (max-width: 760px) { .privacy-footer { display: flex; flex-wrap: wrap; }.privacy-footer__actions { margin-left: auto; } }
+@media (prefers-reduced-motion: reduce) { .startup-toggle > span { transition: none; } }

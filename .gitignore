@@ -1,0 +1,49 @@
+# Dependencies and generated output
+node_modules/
+# Development material stays outside the user distribution
+tests/
+*.test.cjs
+*.e2e.cjs
+*-ASSETS.md
+assets/organ-sources-v2/
+assets/GREENHOUSE-SCENES*.md
+assets/*-source-*.png
+docs/ARCHITECTURE.md
+docs/DEVELOPMENT.md
+docs/PROJECT-STATUS.md
+docs/VERIFICATION.md
+dist/
+out/
+coverage/
+artifacts/
+test-results/
+playwright-report/
+tmp-test-profile*/
+*.log
+
+# Local saves, bridge credentials, recovery copies and reviewed personal data
+backups/
+original-local-storage/
+garden-state*.json
+garden-events.jsonl
+project-garden-bridge.json
+project-garden-outbox/
+*local-storage*.json
+*.before
+*.backup.json
+*.lnk
+integration/reviewed-project-sync*.json*
+integration/project-garden-bridge-plugin/.mcp.json
+plugins/project-garden-bridge/.mcp.json
+.install/
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Local editor and OS files
+.codex/
+.DS_Store
+Thumbs.db
+Desktop.ini

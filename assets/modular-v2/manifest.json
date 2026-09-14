@@ -1,0 +1,189 @@
+{
+  "nasturtium": {
+    "body": [
+      "nasturtium-body-0.png",
+      "nasturtium-body-1.png",
+      "nasturtium-body-2.png",
+      "nasturtium-body-3.png",
+      "nasturtium-body-4.png",
+      "nasturtium-body-5.png"
+    ],
+    "flowering": true,
+    "organs": [
+      "nasturtium-bud.png",
+      "nasturtium-swelling.png",
+      "nasturtium-opening.png",
+      "nasturtium-bloom.png"
+    ]
+  },
+  "african-violet": {
+    "body": [
+      "african-violet-body-0.png",
+      "african-violet-body-1.png",
+      "african-violet-body-2.png",
+      "african-violet-body-3.png",
+      "african-violet-body-4.png",
+      "african-violet-body-5.png"
+    ],
+    "flowering": true,
+    "organs": [
+      "african-violet-bud.png",
+      "african-violet-swelling.png",
+      "african-violet-opening.png",
+      "african-violet-bloom.png"
+    ]
+  },
+  "monstera": {
+    "body": [
+      "monstera-body-0.png",
+      "monstera-body-1.png",
+      "monstera-body-2.png",
+      "monstera-body-3.png",
+      "monstera-body-4.png",
+      "monstera-body-5.png"
+    ],
+    "flowering": false,
+    "organs": [
+      "monstera-bud.png",
+      "monstera-swelling.png",
+      "monstera-opening.png",
+      "monstera-bloom.png"
+    ]
+  },
+  "haworthia": {
+    "body": [
+      "haworthia-body-0.png",
+      "haworthia-body-1.png",
+      "haworthia-body-2.png",
+      "haworthia-body-3.png",
+      "haworthia-body-4.png",
+      "haworthia-body-5.png"
+    ],
+    "flowering": false,
+    "organs": [
+      "haworthia-bud.png",
+      "haworthia-swelling.png",
+      "haworthia-opening.png",
+      "haworthia-bloom.png"
+    ]
+  },
+  "phalaenopsis-orchid": {
+    "body": [
+      "phalaenopsis-orchid-body-0.png",
+      "phalaenopsis-orchid-body-1.png",
+      "phalaenopsis-orchid-body-2.png",
+      "phalaenopsis-orchid-body-3.png",
+      "phalaenopsis-orchid-body-4.png",
+      "phalaenopsis-orchid-body-5.png"
+    ],
+    "flowering": true,
+    "organs": [
+      "phalaenopsis-orchid-bud.png",
+      "phalaenopsis-orchid-swelling.png",
+      "phalaenopsis-orchid-opening.png",
+      "phalaenopsis-orchid-bloom.png"
+    ]
+  },
+  "birds-nest-fern": {
+    "body": [
+      "birds-nest-fern-body-0.png",
+      "birds-nest-fern-body-1.png",
+      "birds-nest-fern-body-2.png",
+      "birds-nest-fern-body-3.png",
+      "birds-nest-fern-body-4.png",
+      "birds-nest-fern-body-5.png"
+    ],
+    "flowering": false,
+    "organs": [
+      "birds-nest-fern-bud.png",
+      "birds-nest-fern-swelling.png",
+      "birds-nest-fern-opening.png",
+      "birds-nest-fern-bloom.png"
+    ]
+  },
+  "hoya-carnosa": {
+    "body": [
+      "hoya-carnosa-body-0.png",
+      "hoya-carnosa-body-1.png",
+      "hoya-carnosa-body-2.png",
+      "hoya-carnosa-body-3.png",
+      "hoya-carnosa-body-4.png",
+      "hoya-carnosa-body-5.png"
+    ],
+    "flowering": true,
+    "organs": [
+      "hoya-carnosa-bud.png",
+      "hoya-carnosa-swelling.png",
+      "hoya-carnosa-opening.png",
+      "hoya-carnosa-bloom.png"
+    ]
+  },
+  "calathea-orbifolia": {
+    "body": [
+      "calathea-orbifolia-body-0.png",
+      "calathea-orbifolia-body-1.png",
+      "calathea-orbifolia-body-2.png",
+      "calathea-orbifolia-body-3.png",
+      "calathea-orbifolia-body-4.png",
+      "calathea-orbifolia-body-5.png"
+    ],
+    "flowering": false,
+    "organs": [
+      "calathea-orbifolia-bud.png",
+      "calathea-orbifolia-swelling.png",
+      "calathea-orbifolia-opening.png",
+      "calathea-orbifolia-bloom.png"
+    ]
+  },
+  "peace-lily": {
+    "body": [
+      "peace-lily-body-0.png",
+      "peace-lily-body-1.png",
+      "peace-lily-body-2.png",
+      "peace-lily-body-3.png",
+      "peace-lily-body-4.png",
+      "peace-lily-body-5.png"
+    ],
+    "flowering": true,
+    "organs": [
+      "peace-lily-bud.png",
+      "peace-lily-swelling.png",
+      "peace-lily-opening.png",
+      "peace-lily-bloom.png"
+    ]
+  },
+  "hydrangea": {
+    "body": [
+      "hydrangea-body-0.png",
+      "hydrangea-body-1.png",
+      "hydrangea-body-2.png",
+      "hydrangea-body-3.png",
+      "hydrangea-body-4.png",
+      "hydrangea-body-5.png"
+    ],
+    "flowering": true,
+    "organs": [
+      "hydrangea-bud.png",
+      "hydrangea-swelling.png",
+      "hydrangea-opening.png",
+      "hydrangea-bloom.png"
+    ]
+  },
+  "anthurium": {
+    "body": [
+      "anthurium-body-0.png",
+      "anthurium-body-1.png",
+      "anthurium-body-2.png",
+      "anthurium-body-3.png",
+      "anthurium-body-4.png",
+      "anthurium-body-5.png"
+    ],
+    "flowering": true,
+    "organs": [
+      "anthurium-bud.png",
+      "anthurium-swelling.png",
+      "anthurium-opening.png",
+      "anthurium-bloom.png"
+    ]
+  }
+}
